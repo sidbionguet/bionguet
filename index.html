@@ -1,0 +1,73 @@
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Gestionnaire de contacts</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+	<h1>Gestionnaire de contacts</h1>
+    <h2>Mes contacts</h2>
+    <div id="listeContacts">
+    
+    </div>
+    <div>
+    	<button id="addNewContact">Ajouter un contact</button>
+    </div>
+    <div id="ajoutContact" class="hideMe">
+    	<h2>Ajouter un contact</h2>
+        <form id="formAddContact">
+        	<div class="row">
+            	<input type="text" id="nom" placeholder="Nom du contact" />
+            </div>
+            <div class="row">
+            	<input type="text" id="prenom" placeholder="Prénom" />
+            </div>
+            <div class="row">
+            	<input type="text" id="tel" placeholder="Téléphone" />
+            </div>
+            <div class="row">
+            	<input type="text" id="mail" placeholder="Email" />
+            </div>
+            <div class="row">
+            	<button type="button" id="submitContact">Enregistrer</button>
+            </div>
+        </form>
+    </div>
+	
+	<script>
+        document.getElementById("submitContact").addEventListener("click", function() {
+            var nom = document.getElementById("nom").value.trim();
+            var prenom = document.getElementById("prenom").value.trim();
+            var tel = document.getElementById("tel").value.trim();
+            var mail = document.getElementById("mail").value.trim();
+            
+            if (nom === "" || prenom === "" || tel === "" || mail === "") {
+                alert("Tous les champs sont obligatoires !");
+                return;
+            }
+
+            var regexLettres = /^[A-Za-zÀ-ÿ\s\-]+$/;
+            if (!regexLettres.test(nom) || !regexLettres.test(prenom)) {
+                alert("Les champs Nom et Prénom doivent contenir uniquement des lettres.");
+                return;
+            }
+
+            var regexChiffres = /^[0-9]+$/;
+            if (!regexChiffres.test(tel)) {
+                alert("Le champ Téléphone doit contenir uniquement des chiffres.");
+                return;
+            }
+
+            if (!mail.includes("@") || !mail.includes(".")) {
+                alert("Le champ Email doit contenir un '@' et un '.'");
+                return;
+            }
+
+            alert("Contact enregistré avec succès !");
+        });
+    </script>
+</body>
+</html>
